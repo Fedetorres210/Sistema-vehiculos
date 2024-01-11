@@ -34,3 +34,30 @@ def obtenerIncidentes():
     coleccion = conectarBase("Incidentes")
     result = coleccion.find()
     return result
+
+
+def obtenerIncidente(incidente):
+    coleccion = conectarBase("Incidentes")
+    result = coleccion.find(incidente)
+    return result
+
+
+def registrarVehiculo(vehiculo):
+    coleccion = conectarBase("Vehiculos")
+    result = coleccion.insert_one(vehiculo)
+    return result
+
+def obtenerVehiculos():
+    coleccion = conectarBase("Vehiculos")
+    result = coleccion.find()
+    return result
+
+def obtenerVehiculo(vehiculo):
+    coleccion = conectarBase("Vehiculos")
+    result = coleccion.find(vehiculo)
+    return result    
+
+def editarVehiculo(placa,cambio):
+    coleccion = conectarBase("Vehiculos")
+    result = coleccion.update_one(placa,cambio)
+    return result  
