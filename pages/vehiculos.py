@@ -5,10 +5,13 @@ from datetime import datetime
 import pandas as pd
 
 
+st.set_page_config(page_title="Vehiculos",
+    page_icon="🚘",
+    layout="wide")
 
 st.title("Bienvenido a la seccion de Vehiculos")
 st.image("https://www.revistaautocrash.com/wp-content/uploads/2019/10/carros-nuevos.jpg")
-consulta = st.selectbox("Seleccione la opcion que desea",["Resumen","Registro de Vehiculo","Edicion de vehiculos", "Consulta de Vehiculos"])
+consulta = st.sidebar.selectbox("Seleccione la opcion que desea",["Resumen","Registro de Vehiculo","Edicion de vehiculos", "Consulta de Vehiculos"])
 if consulta == "Registro de Vehiculo":
     st.title("Registro de Vehiculo")
     placa = st.text_input("Ingrese la placa del vehiculo")

@@ -1,7 +1,8 @@
 from typing import Any
 from geopy.geocoders import Nominatim
+import random
 import requests
-from config import obtenerIncidentes
+from config import obtenerIncidentes,obtenerMantenimientos,obtenerTallers,obtenerPagos
 
 
 
@@ -191,7 +192,6 @@ class Incidente:
 
     def obtenerNumeroIncidente():
         datos = [elem for elem in obtenerIncidentes()]
-        print(datos)
         try:
             numero = int(datos[-1].pop("Numero Incidente")) + 1
         except:
@@ -389,8 +389,128 @@ class BitacoraRegistro:
 
 
 
+class Mantenimiento:
+
+    def obtenerNumeroMantenimiento():
+        datos = [elem for elem in obtenerMantenimientos()]
+        try:
+            numero = int(datos[-1].pop("Numero Mantenimiento")) + 1
+        except:
+            numero =0
+        
+        return numero
+
+    def __init__(self,vehiculo,taller,nombre,descripcion,costo,kilometraje,fechaInicio,fechaFin,calificacion):
+        self.numeroMantenimiento = Mantenimiento.obtenerNumeroMantenimiento()
+        self.vehiculo = vehiculo
+        self.taller = taller
+        self.nombre = nombre
+        self.descripcion = descripcion
+        self.costo = costo
+        self.kilometraje = kilometraje
+        self.fechaInicio = fechaInicio
+        self.fechaFin = fechaFin
+        self.calificacion = calificacion
+
+    
+    def generarDatosCsv(self):
+        csv = {
+            "Numero Mantenimiento": self.numeroMantenimiento,
+            "Vehiculo":self.vehiculo,
+            "Taller":self.taller,
+            "Reparacion": self.nombre,
+            "Detalles": self.descripcion,
+            "Costo":self.costo,
+            "Kilometraje": self.kilometraje,
+            "Fecha Inicio": self.fechaInicio,
+            "Fecha Fin": self.fechaFin,
+            "Calificacion": self.calificacion
+        }
+
+
+        return csv
+
+
+
+class Taller:
+
+    def __init__(self,nombre,ubicacion,telefono1,telefono2):
+        self.numeroTaller = Taller.obtenerNumeroTaller()
+        self.nombre = nombre
+        self.ubicacion = ubicacion
+        self.telefono1 = telefono1
+        self.telefono2 = telefono2
+
+    
+    def generarDatosCsv(self):
+        csv = {
+            "Numero Taller": self.numeroTaller,
+            "Nombre": self.nombre,
+            "Ubicacion":self.ubicacion,
+            "Telefono 1": self.telefono1,
+            "Telefono 2": self.telefono2,
+            
+        }
+
+        return csv
     
 
+    def obtenerNumeroTaller():
+        datos = [elem for elem in obtenerTallers()]
+        try:
+            numero = int(datos[-1].pop("Numero Mantenimiento")) + 1
+        except:
+            numero =0
+        
+        return numero
+
+
+class Pago:
+
+    def __init__(self,conductor,fecha,hora,monto,metodo,detalle):
+        self.conductor = conductor
+        self.fecha = fecha
+        self.hora = hora
+        self.monto = monto
+        self.detalle = detalle
+        self.metodo = metodo
+
+
+
+    def validarComprobante(comprobante):
+        pagos = [elem for elem in obtenerPagos() if elem["Comprobante"]== comprobante]
+        
+        if pagos == []:
+            return True
+        return False
+    
+    def generarComprobante(conductor):
+        
+        comprobante = conductor["Nombre"][0:2] + conductor["Apellido"][0:2] +  "-"+  str(random.randint(1000,10000))
+        print(comprobante)
+        if not Pago.validarComprobante(comprobante):
+            Pago.generarComprobante(conductor)
+        return comprobante
+    
+    
+    def generarDatosCsv(self):
+        csv = {
+            "Comprobante": Pago.generarComprobante(self.conductor),
+            "Conductor":self.conductor,
+            "Fecha":self.fecha,
+            "Hora":self.hora,
+            "Monto":self.monto,
+            "Metodo":self.metodo,
+            "Detalle": self.detalle
+        }
+
+        return csv
+
+
+    
+    
+    
+        
         
     
 

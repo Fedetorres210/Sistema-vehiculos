@@ -4,11 +4,11 @@ from logica import Conductor, Mapa, Incidente
 import pandas as pd
 
 
-st.set_page_config(page_title="Conductores", page_icon="📈")
+st.set_page_config(page_title="Conductores", page_icon="📈",layout="wide")
 
 st.header("Bienvenido a la seccion de conductores")
 st.image("https://www.emagister.com/blog/wp-content/uploads/2019/04/ch%C3%B3fer-privado.jpg")
-opcionConductores = st.selectbox("Seleccione la accion por realizar",["Resumen","Registro de Conductor", "Consulta de informacion de conductor", "Registro de incidentes","Consulta de incidentes"])
+opcionConductores = st.sidebar.selectbox("Seleccione la accion por realizar",["Resumen","Registro de Conductor", "Consulta de informacion de conductor", "Registro de incidentes","Consulta de incidentes"])
 
 if (opcionConductores== "Resumen"):
     totalConductor = obtenerConductores()
