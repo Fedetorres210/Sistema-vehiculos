@@ -42,7 +42,6 @@ class Conductor:
             "Cedula": self.cedula,
             "Numero de Licencia": self.numLicencia,
             "Direccion": self.direccion,
-            "Vehiculo": self.vehiculo,
             "Pagos": self.pagos,
             "FotoCedula": self.fotoCedula,
             "FotoLicencia": self.fotoLicenia,
