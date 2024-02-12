@@ -26,7 +26,6 @@ class Conductor:
         self.numLicencia = numLicencia
         self.direccion = direccion
         # Placa vehiculo se refiere a el vehiculo que usa el conductor
-        self.vehiculo = vehiculo
         #Pagos es un atributo que confirma si el conductor se encuentra al dia con os pagos
         self.fotoCedula = fotoCedula
         self.fotoLicenia = fotoLicencia

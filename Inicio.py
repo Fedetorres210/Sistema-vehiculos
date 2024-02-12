@@ -17,7 +17,7 @@ st.text("Dentro de este sistema se encuentra las paginas del sistema, estas se d
 
 
 
-
+st.image("https://imgur.com/j5s52Hm.jpeg")
 
 
 

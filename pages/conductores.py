@@ -68,11 +68,11 @@ if (opcionConductores== "Registro de Conductor"):
     registrar = st.button("Registrar Conductor")
 
     if (registrar):
-        try:
+        
             nuevoConductor = Conductor(nombre, apellido, cedula, licencia, direccionExacta, fotoConductor,fotoCedula, fotoLicencia,cuotaSemanal)
             insertarCondcutor(nuevoConductor.generarDatosCsv())
             st.success("Nuevo Conductor Insertado!")
-        except:
+        
             st.warning("Ha ocurrido un fallo con la insercion del usuario")
 
 if (opcionConductores== "Consulta de informacion de conductor"):
